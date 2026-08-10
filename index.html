@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#2948ef">
+<title>Zply — Online Store</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<svg aria-hidden="true" class="svg-sprite">
+<symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+<symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></symbol>
+<symbol id="i-cart" viewBox="0 0 24 24"><path d="M3 4h2l2.2 11.1a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 1.9-1.4L21 8H6"/><circle cx="10" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></symbol>
+<symbol id="i-x" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+<symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+<symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
+<symbol id="i-chevron" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+<symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+<symbol id="i-package" viewBox="0 0 24 24"><path d="m12 3 8 4.5v9L12 21l-8-4.5v-9L12 3Z"/><path d="m4.5 7.5 7.5 4 7.5-4M12 11.5V21"/></symbol>
+<symbol id="i-settings" viewBox="0 0 24 24"><path d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z"/><path d="m19 13 2 1-2 3-2-1a7 7 0 0 1-2 1l-.3 2.2h-3.4L11 17a7 7 0 0 1-2-1l-2 1-2-3 2-1a7 7 0 0 1 0-2L5 10l2-3 2 1a7 7 0 0 1 2-1l.3-2.2h3.4L15 7a7 7 0 0 1 2 1l2-1 2 3-2 1a7 7 0 0 1 0 2Z"/></symbol>
+<symbol id="i-truck" viewBox="0 0 24 24"><path d="M3 6h11v10H3zM14 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></symbol>
+<symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z"/><circle cx="12" cy="12" r="2.5"/></symbol>
+<symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M9 7V4h6v3M7 7l1 13h8l1-13M10 11v5M14 11v5"/></symbol>
+<symbol id="i-edit" viewBox="0 0 24 24"><path d="m4 16-.7 4.7L8 20l11-11-4-4L4 16Z"/><path d="m13 6 4 4"/></symbol>
+<symbol id="i-home" viewBox="0 0 24 24"><path d="m3 11 9-8 9 8v9H3z"/><path d="M9 20v-6h6v6"/></symbol>
+<symbol id="i-history" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5M12 7v5l3 2"/></symbol>
+</svg>
+
+<div id="toast" class="toast" role="status"></div>
+<div class="topbar">আপনার সকল পণ্য কিনুন Zply থেকে <span>দ্রুত ডেলিভারি • Cash on Delivery</span></div>
+
+<header class="header">
+  <button class="icon-btn" id="menuBtn" aria-label="Menu"><svg><use href="#i-menu"/></svg></button>
+  <button class="brand-btn" id="homeBtn"><img src="https://i.postimg.cc/MKGqwwSv/20260810-072258.jpg" alt="Zply"></button>
+  <div class="header-actions">
+    <button class="icon-btn plain" id="searchBtn" aria-label="Search"><svg><use href="#i-search"/></svg></button>
+    <button class="icon-btn cart-icon" id="cartBtn" aria-label="Cart"><svg><use href="#i-cart"/></svg><b id="cartCount">0</b></button>
+  </div>
+</header>
+
+<main>
+<section id="homePage" class="page active">
+  <div class="hero"><img src="https://i.postimg.cc/tgkCFQL4/Pink-and-White-Minimalist-E-Commerce-Presentation-20260810-130823-0000.png" alt="Zply banner"></div>
+  <section class="section">
+    <div class="section-head"><h2>Shop by category</h2><button class="primary-sm" data-page="products">View all <svg><use href="#i-chevron"/></svg></button></div>
+    <div id="categoryGrid" class="category-grid"><div class="loading">Loading categories…</div></div>
+  </section>
+  <section class="section">
+    <div class="section-head"><h2>Featured Products</h2><button class="primary-sm" data-page="products">View all <svg><use href="#i-chevron"/></svg></button></div>
+    <div id="featuredProducts" class="product-grid"><div class="loading">Loading products…</div></div>
+  </section>
+</section>
+
+<section id="productsPage" class="page">
+  <div class="page-title-row"><div><p class="eyebrow">Zply Store</p><h1>Products</h1></div><button class="secondary-btn" id="clearFilter">All</button></div>
+  <div id="productsGrid" class="product-grid"></div>
+</section>
+
+<section id="detailPage" class="page">
+  <div class="breadcrumbs"><button data-page="home">Home</button><span>›</span><button data-page="products">Products</button><span>›</span><strong id="detailCrumb">Product</strong></div>
+  <div class="detail-layout">
+    <div class="gallery"><div class="main-photo"><img id="detailImage" src="" alt=""><button id="zoomBtn" class="zoom-btn"><svg><use href="#i-eye"/></svg></button></div></div>
+    <div class="detail-info">
+      <h1 id="detailName"></h1>
+      <div class="price-row"><strong id="detailPrice"></strong><del id="detailOldPrice"></del><span id="detailSave"></span></div>
+      <div class="option-block"><label>Size</label><div id="sizeOptions" class="sizes"></div></div>
+      <div class="buy-panel"><div class="qty"><button id="minusQty"><svg><use href="#i-minus"/></svg></button><input id="qtyInput" type="number" value="1" min="1" max="10"><button id="plusQty"><svg><use href="#i-plus"/></svg></button></div><button class="primary-btn" id="addToCart">ADD TO CART</button><button class="primary-btn full" id="buyNow">BUY NOW</button></div>
+      <div id="detailDescription" class="description"></div>
+    </div>
+  </div>
+</section>
+
+<section id="cartPage" class="page">
+  <div class="page-title-row"><div><p class="eyebrow">Your bag</p><h1>Shopping Cart</h1></div></div>
+  <div id="cartItems"></div>
+  <div class="cart-summary"><div><span>Sub Total</span><strong id="subtotal">0 BDT</strong></div><div><span>Delivery charge</span><strong id="cartDelivery">0 BDT</strong></div><hr><div class="total"><span>Total</span><strong id="cartTotal">0 BDT</strong></div></div>
+  <button class="primary-btn full" id="checkoutBtn">CHECKOUT</button>
+</section>
+
+<section id="checkoutPage" class="page">
+  <div class="page-title-row"><div><p class="eyebrow">Cash on Delivery</p><h1>অর্ডার করুন</h1></div></div>
+  <form id="orderForm" class="checkout-form">
+    <div class="form-card"><h2>Customer Information</h2>
+      <label>নাম <span>*</span><input id="customerName" required maxlength="80" placeholder="আপনার নাম"></label>
+      <label>মোবাইল নম্বর <span>*</span><input id="phone" required inputmode="tel" maxlength="20" placeholder="01XXXXXXXXX"></label>
+    </div>
+    <div class="form-card"><h2>Delivery Location</h2>
+      <label>বিভাগ <span>*</span><select id="division" required><option value="">বিভাগ নির্বাচন করুন</option></select></label>
+      <label>জেলা <span>*</span><select id="district" required disabled><option value="">আগে বিভাগ নির্বাচন করুন</option></select></label>
+      <label>থানা / উপজেলা <span>*</span><input id="thana" required maxlength="80" placeholder="থানার নাম লিখুন"></label>
+      <label>Delivery Zone <span>*</span><select id="deliveryZone" required><option value="dhaka">Dhaka City — 70 BDT</option><option value="outside">Outside Dhaka City — 120 BDT</option></select></label>
+      <label>Delivery Address <span>*</span><textarea id="address" required maxlength="300" placeholder="Road, House, Floor, Area etc. বিস্তারিত ঠিকানা লিখুন"></textarea></label>
+      <label>Order Note <small>(ঐচ্ছিক)</small><textarea id="note" maxlength="250" placeholder="যেমন: বিকাল ৫টার পরে কল করবেন"></textarea></label>
+    </div>
+    <div class="form-card"><h2>Order Summary</h2><div id="checkoutSummary"></div><div class="delivery-line"><span>Delivery</span><strong id="checkoutDelivery">70 BDT</strong></div><div class="grand-total"><span>Total</span><strong id="checkoutTotal">0 BDT</strong></div><p class="cod-note"><svg><use href="#i-check"/></svg> Cash on Delivery — পণ্য হাতে পেয়ে মূল্য পরিশোধ করুন।</p></div>
+    <button class="primary-btn full" id="placeOrderBtn" type="submit">CONFIRM ORDER</button>
+  </form>
+</section>
+
+<section id="successPage" class="page"><div class="success-card"><div class="success-icon"><svg><use href="#i-check"/></svg></div><h1>অর্ডার সফল হয়েছে!</h1><p>আপনার অর্ডারটি আমরা পেয়েছি। খুব শীঘ্রই আপনাকে ফোন করে কনফার্ম করা হবে।</p><div class="order-id">Order ID: <b id="successOrderId">—</b></div><button class="primary-btn" data-page="history">অর্ডার হিস্টোরি</button><button class="secondary-btn" data-page="home">BACK TO HOME</button></div></section>
+
+<section id="historyPage" class="page">
+  <div class="page-title-row"><div><p class="eyebrow">Track your orders</p><h1>Order History</h1></div></div>
+  <div class="history-search form-card"><label>Order ID <input id="historyId" placeholder="Order ID লিখুন"></label><label>Tracking Code <input id="historyCode" placeholder="Tracking Code লিখুন"></label><button class="primary-btn" id="trackOrderBtn">STATUS CHECK</button></div>
+  <div id="historyList"></div>
+</section>
+
+
+</main>
+
+<footer><img src="https://i.postimg.cc/MKGqwwSv/20260810-072258.jpg" alt="Zply" class="footer-logo"><div class="footer-grid"><div><h3>QUICK LINKS</h3><a data-page="home">About Us</a><a data-page="history">Order History</a><a data-page="home">Privacy Policy</a><a data-page="home">Terms And Conditions</a><a data-page="home">Return And Cancellation Policy</a></div><div><h3>CONTACT US</h3><p>Madhupur, Tangail, Dhaka</p><p>01826989550</p><p>saiful.islam93781@gmail.com</p></div></div><div class="copyright">© Zply 2026. All rights reserved</div></footer>
+
+<div id="sideMenu" class="drawer"><div class="drawer-head"><h2>Menu</h2><button id="closeMenu" class="icon-btn"><svg><use href="#i-x"/></svg></button></div><button data-page="home"><svg><use href="#i-home"/></svg> Home</button><button data-page="products"><svg><use href="#i-package"/></svg> All Products</button><button data-page="history"><svg><use href="#i-history"/></svg> Order History</button><div class="drawer-cats"><h3>Categories</h3><div id="drawerCategories">Loading…</div></div></div>
+<div id="overlay" class="overlay"></div>
+
+<div id="searchModal" class="modal"><div class="search-box"><button id="closeSearch" class="icon-btn"><svg><use href="#i-x"/></svg></button><input id="searchInput" autofocus placeholder="পণ্য খুঁজুন…"><div id="searchResults"></div></div></div>
+<div id="zoomModal" class="modal"><button id="closeZoom" class="icon-btn"><svg><use href="#i-x"/></svg></button><img id="zoomImage" src="" alt=""></div>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>

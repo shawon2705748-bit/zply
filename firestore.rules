@@ -1,0 +1,61 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isAdmin() {
+      return request.auth != null &&
+        exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
+    match /categories/{categoryId} {
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
+    }
+
+    match /products/{productId} {
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
+    }
+
+    match /orders/{orderId} {
+      allow create: if
+        request.resource.data.customerName is string &&
+        request.resource.data.customerName.size() >= 2 &&
+        request.resource.data.customerName.size() <= 80 &&
+        request.resource.data.phone is string &&
+        request.resource.data.phone.matches('01[3-9][0-9]{8}') &&
+        request.resource.data.division is string &&
+        request.resource.data.district is string &&
+        request.resource.data.thana is string &&
+        request.resource.data.thana.size() >= 2 &&
+        request.resource.data.thana.size() <= 80 &&
+        request.resource.data.deliveryAddress is string &&
+        request.resource.data.deliveryAddress.size() >= 5 &&
+        request.resource.data.deliveryAddress.size() <= 300 &&
+        request.resource.data.deliveryZone in ['Dhaka City', 'Outside Dhaka City'] &&
+        request.resource.data.deliveryCharge in [70, 120] &&
+        request.resource.data.paymentMethod == 'Cash on Delivery' &&
+        request.resource.data.status == 'pending' &&
+        request.resource.data.total is number &&
+        request.resource.data.trackingCode is string;
+      allow read, update, delete: if isAdmin();
+    }
+
+    // Public status-only tracking document. It contains no customer address/phone.
+    match /orderTracking/{trackingCode} {
+      allow read: if true;
+      allow create: if
+        request.resource.data.status == 'pending' &&
+        request.resource.data.orderId is string;
+      allow update: if isAdmin();
+      allow delete: if isAdmin();
+    }
+
+    // Create the first admin document manually in Firebase Console.
+    // After that, existing admins may manage admin documents.
+    match /admins/{uid} {
+      allow read: if request.auth != null && request.auth.uid == uid;
+      allow create, update, delete: if isAdmin();
+    }
+  }
+}
